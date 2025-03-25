@@ -1,39 +1,45 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>项目介绍 | Xizuo</title>
+  <title>Projects - Xizuo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
 </head>
-<body>
-  <nav>
-    <ul>
-      <li><a href="index.html">简介</a></li>
-      <li><a href="notes.html">笔记分享</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="projects.html">项目介绍</a></li>
-      <li><a href="faq.html">FAQ</a></li>
+<body data-page="projects">
+  <div class="site-title">Xizuo's Official Site</div>
+
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a id="nav-about" href="index.html">About</a></li>
+      <li><a id="nav-blog" href="blog.html">Blog</a></li>
+      <li><a id="nav-notes" href="notes.html">Notes</a></li>
+      <li><a id="nav-projects" href="projects.html">Projects</a></li>
+      <li><a id="nav-faq" href="faq.html">FAQ</a></li>
     </ul>
+    <div class="lang-switcher">
+      <select id="language-select">
+        <option value="en">EN</option>
+        <option value="zh">简</option>
+        <option value="tw">繁</option>
+        <option value="jp">日</option>
+        <option value="fr">FR</option>
+      </select>
+    </div>
   </nav>
 
   <main>
-    <h1>🚧 项目介绍</h1>
-    <div class="project">
-      <h2>MyClock24 - 自定义 24 小时时钟</h2>
-      <p>语言：Python</p>
-      <p>功能：模拟时钟，支持时间加减、比较等操作。</p>
-      <a href="#">查看代码 →</a>
-    </div>
-    <div class="project">
-      <h2>Retirement Calculator - 退休储蓄模拟器</h2>
-      <p>语言：Python + Pandas</p>
-      <p>功能：根据历史数据评估三种投资策略的表现。</p>
-      <a href="#">查看项目 →</a>
+    <h1 id="projects-title">Projects</h1>
+    <div class="project-list">
+      <div class="project-item">
+        <h2>MyClock24 - 自定义 24 小时制时钟</h2>
+        <p>Language: Python</p>
+        <p>功能：模拟时钟，支持时间加减、比较等操作。</p>
+        <a href="projects/project1.html">Read More...</a>
+      </div>
+      <!-- 你可以添加更多项目 -->
     </div>
   </main>
-
-  <footer>
-    <p>© 2025 Xizuo</p>
-  </footer>
 </body>
 </html>

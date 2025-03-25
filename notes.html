@@ -1,33 +1,44 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>笔记分享 | Xizuo</title>
+  <title>Notes - Xizuo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
 </head>
-<body>
-  <nav>
-    <ul>
-      <li><a href="index.html">简介</a></li>
-      <li><a href="notes.html">笔记分享</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="projects.html">项目介绍</a></li>
-      <li><a href="faq.html">FAQ</a></li>
+<body data-page="notes">
+  <div class="site-title">Xizuo's Official Site</div>
+
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a id="nav-about" href="index.html">About</a></li>
+      <li><a id="nav-blog" href="blog.html">Blog</a></li>
+      <li><a id="nav-notes" href="notes.html">Notes</a></li>
+      <li><a id="nav-projects" href="projects.html">Projects</a></li>
+      <li><a id="nav-faq" href="faq.html">FAQ</a></li>
     </ul>
+    <div class="lang-switcher">
+      <select id="language-select">
+        <option value="en">EN</option>
+        <option value="zh">简</option>
+        <option value="tw">繁</option>
+        <option value="jp">日</option>
+        <option value="fr">FR</option>
+      </select>
+    </div>
   </nav>
 
   <main>
-    <h1>📘 笔记分享</h1>
+    <h1 id="notes-title">Notes</h1>
     <ul>
-      <li><a href="#">Python 学习笔记</a></li>
-      <li><a href="#">C++ 基础总结</a></li>
-      <li><a href="#">算法题技巧整理</a></li>
-      <li><a href="#">数据分析工具笔记</a></li>
+      <!-- 这里通过URL参数指定要查看的 .md 文件 -->
+      <li><a href="noteViewer.html?file=notes/python.md">Python Basics</a></li>
+      <li><a href="noteViewer.html?file=notes/cpp.md">C++ Quick Guide</a></li>
+      <li><a href="noteViewer.html?file=notes/data_analysis.md">Data Analysis Tips</a></li>
+      <!-- 继续添加更多笔记链接 -->
     </ul>
+    <p>Click on a note to view its Markdown content.</p>
   </main>
-
-  <footer>
-    <p>© 2025 Xizuo</p>
-  </footer>
 </body>
 </html>

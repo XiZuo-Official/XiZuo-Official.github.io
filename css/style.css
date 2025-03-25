@@ -1,4 +1,4 @@
-/* 粉色少女系网站样式 */
+/* ========== 通用基础 ========== */
 body {
   margin: 0;
   font-family: 'Quicksand', sans-serif;
@@ -6,29 +6,40 @@ body {
   color: #333;
 }
 
+/* 网站最上方标题 */
+.site-title {
+  text-align: center;
+  padding: 0.8rem;
+  background-color: #ffd6e0;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* ========== 导航栏 ========== */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #ffb6c1;
-  padding: 1rem 2rem;
+  padding: 0.8rem 2rem;
   box-shadow: 0 4px 6px rgba(255, 182, 193, 0.3);
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-.logo {
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: white;
-}
-
+/* 导航链接容器：均匀分布 */
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  justify-content: space-evenly;
+  align-items: center;
   margin: 0;
+  flex: 1; /* 让它撑开 */
+}
+
+.nav-links li {
+  margin: 0 0.5rem;
 }
 
 .nav-links li a {
@@ -36,35 +47,26 @@ body {
   color: white;
   font-weight: bold;
   position: relative;
-  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  transition: background-color 0.15s ease;
 }
 
+/* 鼠标悬停时出现圆角方框 */
 .nav-links li a:hover {
-  color: #fff8f0;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-.nav-links li a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: white;
-  transition: width 0.3s ease;
-}
-
-.nav-links li a:hover::after {
-  width: 100%;
-}
-
+/* 语言选择器 */
 .lang-switcher select {
   padding: 0.3rem;
   border-radius: 5px;
   border: none;
   font-size: 1rem;
+  margin-left: 1rem;
 }
 
+/* ========== 头部区域 / About ========== */
 .hero {
   text-align: center;
   padding: 3rem 1rem;
@@ -101,18 +103,112 @@ body {
   text-decoration: underline;
 }
 
-#search {
-  margin-top: 1.5rem;
-  padding: 0.5rem 1rem;
-  border: 2px solid #ffb6c1;
-  border-radius: 20px;
-  font-size: 1rem;
-  width: 250px;
-  transition: 0.3s ease;
+/* ========== 内容分区 ========== */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-#search:focus {
-  outline: none;
-  border-color: #d63384;
-  box-shadow: 0 0 5px rgba(255, 182, 193, 0.5);
+h1, h2 {
+  color: #d63384;
 }
+
+/* ========== Blog Moments 风格 ========== */
+.moment {
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 1rem 0;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(255, 182, 193, 0.2);
+}
+
+.moment-date {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+
+.moment-text p {
+  margin: 0.5rem 0;
+}
+
+.moment-images img {
+  max-width: 120px;
+  margin-right: 0.5rem;
+  border-radius: 5px;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #d63384;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+/* ========== Projects 样式 ========== */
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-item {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(255, 182, 193, 0.2);
+}
+
+.project-item h2 {
+  margin: 0.5rem 0;
+}
+
+.project-item a {
+  color: #d63384;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.project-item a:hover {
+  text-decoration: underline;
+}
+
+/* ========== FAQ 样式 ========== */
+/* 无白色框，仅保留简洁文字布局 */
+.faq-item {
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.faq-item h3 {
+  margin: 0.5rem 0;
+  color: #d63384;
+}
+
+/* 答案默认只显示一行省略号 */
+.faq-answer {
+  margin: 0;
+  padding: 0.5rem 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+/* collapsed: 只显示一行 */
+.faq-answer.collapsed {
+  height: 1.4em; /* 可微调 */
+}
+
+/* expanded: 显示全部 */
+.faq-answer.expanded {
+  height: auto;
+  white-space: normal;
+}
+

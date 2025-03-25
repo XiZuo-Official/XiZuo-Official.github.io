@@ -1,35 +1,68 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>FAQ | Xizuo</title>
+  <title>FAQ - Xizuo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 引入你的通用样式和脚本 -->
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
 </head>
-<body>
-  <nav>
-    <ul>
-      <li><a href="index.html">简介</a></li>
-      <li><a href="notes.html">笔记分享</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="projects.html">项目介绍</a></li>
-      <li><a href="faq.html">FAQ</a></li>
+<body data-page="faq">
+  <!-- 顶部标题栏（与其他页面相同） -->
+  <div class="site-title">Xizuo's Official Site</div>
+
+  <!-- 导航栏（与其他页面相同，多语言切换也保持一致） -->
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a id="nav-about" href="index.html">About</a></li>
+      <li><a id="nav-blog" href="blog.html">Blog</a></li>
+      <li><a id="nav-notes" href="notes.html">Notes</a></li>
+      <li><a id="nav-projects" href="projects.html">Projects</a></li>
+      <li><a id="nav-faq" href="faq.html">FAQ</a></li>
     </ul>
+    <div class="lang-switcher">
+      <select id="language-select">
+        <option value="en">EN</option>
+        <option value="zh">简</option>
+        <option value="tw">繁</option>
+        <option value="jp">日</option>
+        <option value="fr">FR</option>
+      </select>
+    </div>
   </nav>
 
   <main>
-    <h1>❓ 常见问题</h1>
-    <h3>Q：这个网站用什么做的？</h3>
-    <p>A：使用 HTML + CSS，部署在 GitHub Pages。</p>
+    <h1 id="faq-title">FAQ</h1>
 
-    <h3>Q：你会持续更新吗？</h3>
-    <p>A：是的，我会记录学习和项目过程，欢迎关注！</p>
+    <!-- FAQ Item 1 -->
+    <section class="faq-item">
+      <h3>Q: Why build this site?</h3>
+      <p class="faq-answer collapsed">
+        A: It is to 
+      </p>
+    </section>
 
-    <h3>Q：可以联系你提建议吗？</h3>
-    <p>A：当然可以，页面底部有邮箱链接。</p>
+    <!-- FAQ Item 2 -->
+    <section class="faq-item">
+      <h3>Q: Which technologies do you use?</h3>
+      <p class="faq-answer collapsed">
+        A: Primarily HTML, CSS, JavaScript, and GitHub Pages. 
+        Optionally frameworks like Vue or React for bigger projects. 
+        You can also add Python (Flask, Django) for backend if needed, etc...
+      </p>
+    </section>
+
+  <!-- FAQ Item 3 -->
+  <section class="faq-item">
+    <h3>Q: How to donate?</h3>
+    <p class="faq-answer collapsed">
+      A: You can scan the QR code below to transfer to me by WeChat Wallet, Alipay, Zelle, or Paypal. You can also subscribe my OnlyFans Accout.
+      "images/Alipay.jpg" | images/WeChat.jpg
+    </p>
+  </section>
+
+    <!-- 更多 FAQ... -->
   </main>
-
-  <footer>
-    <p>© 2025 Xizuo</p>
-  </footer>
 </body>
 </html>

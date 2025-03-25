@@ -1,35 +1,63 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>博客 | Xizuo</title>
+  <title>Blog - Xizuo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
 </head>
-<body>
-  <nav>
-    <ul>
-      <li><a href="index.html">简介</a></li>
-      <li><a href="notes.html">笔记分享</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="projects.html">项目介绍</a></li>
-      <li><a href="faq.html">FAQ</a></li>
+<body data-page="blog">
+  <div class="site-title">Xizuo's Official Site</div>
+
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a id="nav-about" href="index.html">About</a></li>
+      <li><a id="nav-blog" href="blog.html">Blog</a></li>
+      <li><a id="nav-notes" href="notes.html">Notes</a></li>
+      <li><a id="nav-projects" href="projects.html">Projects</a></li>
+      <li><a id="nav-faq" href="faq.html">FAQ</a></li>
     </ul>
+    <div class="lang-switcher">
+      <select id="language-select">
+        <option value="en">EN</option>
+        <option value="zh">简</option>
+        <option value="tw">繁</option>
+        <option value="jp">日</option>
+        <option value="fr">FR</option>
+      </select>
+    </div>
   </nav>
 
   <main>
-    <h1>📝 博客</h1>
-    <article>
-      <h2><a href="#">学习路线：如何从零开始掌握 Python？</a></h2>
-      <p>2025-03-24 | 我的编程思考与学习路径</p>
-    </article>
-    <article>
-      <h2><a href="#">项目回顾：使用 Pandas 分析股票数据</a></h2>
-      <p>2025-03-10 | 技术总结 + 实践经验</p>
-    </article>
-  </main>
+    <h1 id="blog-title">Blog</h1>
 
-  <footer>
-    <p>© 2025 Xizuo</p>
-  </footer>
+    <!-- 示例动态 1 -->
+    <article class="moment">
+      <div class="moment-date">2025-03-30</div>
+      <div class="moment-text">
+        <p>My first blog post! Here is a short excerpt... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae.</p>
+      </div>
+      <div class="moment-images">
+        <img src="xizuo_website/images/WeChat.jpg" alt="Post1 image1">
+        <img src="images/post1-img2.jpg" alt="Post1 image2">
+      </div>
+      <a href="blog/post1.html" class="read-more">Read More...</a>
+    </article>
+
+    <!-- 示例动态 2 -->
+    <article class="moment">
+      <div class="moment-date">2025-03-25</div>
+      <div class="moment-text">
+        <p>Another blog post. This time I'm sharing some photos of my day. Lorem ipsum dolor sit amet...</p>
+      </div>
+      <div class="moment-images">
+        <img src="images/post2-img1.jpg" alt="Post2 image1">
+      </div>
+      <a href="blog/post2.html" class="read-more">Read More...</a>
+    </article>
+
+    <!-- 你可以继续添加更多动态 -->
+  </main>
 </body>
 </html>

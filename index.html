@@ -2,48 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Xizuo's Homepage</title>
+  <title>Xizuo's Official Site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 关键：引入公共样式和脚本 -->
   <link rel="stylesheet" href="css/style.css">
   <script src="js/script.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 </head>
-<body>
-  <header class="hero">
-    <nav class="navbar">
-      <div class="logo">Xizuo</div>
-      <ul class="nav-links">
-        <li><a href="#">About</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Notes</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">Guestbook</a></li>
-        <li><a href="#">FAQ</a></li>
-      </ul>
-      <div class="lang-switcher">
-        <select id="language-select">
-          <option value="en">EN</option>
-          <option value="zh">简</option>
-          <option value="tw">繁</option>
-          <option value="jp">日</option>
-          <option value="fr">FR</option>
-        </select>
-      </div>
-    </nav>
+<body data-page="home">
+  <!-- 页面最上方标题 -->
+  <div class="site-title">Xizuo's Official Site</div>
 
-    <div class="about">
-      <img src="images/profile.jpg" alt="Profile" class="avatar">
-      <h1 id="intro-text">Hi, I'm Xizuo! 🌸</h1>
-      <p id="intro-desc">
-        A fintech student passionate about coding, data and finance.  
-        Exploring the world with Python, C++, and curiosity.
-      </p>
-      <div class="contact">
-        📬 <a href="mailto:your_email@example.com">Email</a> | 
-        <a href="https://github.com/XiZuo-Official" target="_blank">GitHub</a>
-      </div>
-      <input type="text" id="search" placeholder="Search..." />
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a id="nav-about" href="index.html">About</a></li>
+      <li><a id="nav-blog" href="blog.html">Blog</a></li>
+      <li><a id="nav-notes" href="notes.html">Notes</a></li>
+      <li><a id="nav-projects" href="projects.html">Projects</a></li>
+      <li><a id="nav-faq" href="faq.html">FAQ</a></li>
+    </ul>
+    <div class="lang-switcher">
+      <select id="language-select">
+        <option value="en">EN</option>
+        <option value="zh">简</option>
+        <option value="tw">繁</option>
+        <option value="jp">日</option>
+        <option value="fr">FR</option>
+      </select>
     </div>
-  </header>
-</body>
-</html>
+  </nav>
+
+  <!-- 主体内容：About -->
+  <main>
+    <section class="hero">
+      <div class="about">
+        <img src= "images/profile.jpg" alt="Profile" class="avatar">
+        <h1 id="intro-text">Hi, I'm Xizuo! 🌸</h1>
+        <p id="intro-desc">
+          A fintech student passionate about coding, data and finance.<br>
+          Exploring the world with Python, C++, and curiosity.
+        <div class="contact">
+          📬 <a href="mailto:your_email@example.com">Email</a> | 
+          <a href="https://github.com/XiZuo-Official" target="_blank">GitHub</a> |
+          <a href="https://onlyfans.com/YourOnlyFansName" target="_blank">OnlyFans</a> |
+          <a href="https://www.linkedin.com/in/YourLinkedIn" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer style="text-align: center; padding: 1rem; background-color: #ffe0f0; margin-top: 2rem;">
+    <p>© 2025 XiZuo-Official. All rights reserved.</p>
+  </footer>
+  </body>
+  </html>
