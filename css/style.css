@@ -1,78 +1,118 @@
+/* 粉色少女系网站样式 */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #fdfdfd;
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(to bottom, #ffe0f0, #fff0f5);
   color: #333;
-  line-height: 1.6;
 }
 
-nav {
-  background-color: #2c3e50;
-  padding: 1em;
-  text-align: center;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffb6c1;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(255, 182, 193, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-nav ul {
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.nav-links {
   list-style: none;
+  display: flex;
+  gap: 1.5rem;
   margin: 0;
-  padding: 0;
 }
 
-nav ul li {
-  display: inline;
-  margin: 0 1em;
-}
-
-nav ul li a {
-  color: #fff;
+.nav-links li a {
   text-decoration: none;
+  color: white;
+  font-weight: bold;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #fff8f0;
+}
+
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+.lang-switcher select {
+  padding: 0.3rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+}
+
+.hero {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ffb6c1;
+  margin-bottom: 1rem;
+}
+
+.about h1 {
+  font-size: 2rem;
+  color: #d63384;
+  margin-bottom: 0.5rem;
+}
+
+.about p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.contact a {
+  color: #d63384;
+  text-decoration: none;
+  margin: 0 0.5rem;
   font-weight: bold;
 }
 
-nav ul li a:hover {
+.contact a:hover {
   text-decoration: underline;
 }
 
-header, main, footer {
-  max-width: 800px;
-  margin: 2em auto;
-  padding: 0 1em;
+#search {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #ffb6c1;
+  border-radius: 20px;
+  font-size: 1rem;
+  width: 250px;
+  transition: 0.3s ease;
 }
 
-header h1 {
-  font-size: 2em;
-  margin-bottom: 0.2em;
-}
-
-h1, h2, h3 {
-  color: #2c3e50;
-}
-
-ul {
-  padding-left: 1.2em;
-}
-
-.project {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 1em;
-  margin-bottom: 1em;
-  background-color: #fafafa;
-}
-
-footer {
-  text-align: center;
-  color: #777;
-  font-size: 0.9em;
-  padding: 2em 0;
-  border-top: 1px solid #eee;
-}
-
-a {
-  color: #007acc;
-}
-
-a:hover {
-  color: #005f99;
+#search:focus {
+  outline: none;
+  border-color: #d63384;
+  box-shadow: 0 0 5px rgba(255, 182, 193, 0.5);
 }
