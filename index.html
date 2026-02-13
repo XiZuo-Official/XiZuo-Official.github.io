@@ -1,58 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Xizuo's Official Site</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- 关键：引入公共样式和脚本 -->
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/script.js" defer></script>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
-</head>
-<body data-page="home">
-  <!-- 页面最上方标题 -->
-  <div class="site-title">Xizuo's Official Site</div>
-
-  <!-- 导航栏 -->
-  <nav class="navbar">
-    <ul class="nav-links">
-      <li><a id="nav-about" href="index.html">About</a></li>
-      <li><a id="nav-blog" href="blog.html">Blog</a></li>
-      <li><a id="nav-notes" href="notes.html">Notes</a></li>
-      <li><a id="nav-projects" href="projects.html">Projects</a></li>
-      <li><a id="nav-faq" href="faq.html">FAQ</a></li>
-    </ul>
-    <div class="lang-switcher">
-      <select id="language-select">
-        <option value="en">EN</option>
-        <option value="zh">简</option>
-        <option value="tw">繁</option>
-        <option value="jp">日</option>
-        <option value="fr">FR</option>
-      </select>
-    </div>
-  </nav>
-
-  <!-- 主体内容：About -->
-  <main>
-    <section class="hero">
-      <div class="about">
-        <img src= "images/profile.jpg" alt="Profile" class="avatar">
-        <h1 id="intro-text">Hi, I'm Xizuo! 🌸</h1>
-        <p id="intro-desc">
-          A fintech student passionate about coding, data and finance.<br>
-          Exploring the world with Python, C++, and curiosity.
-        <div class="contact">
-          📬 <a href="mailto:your_email@example.com">Email</a> | 
-          <a href="https://github.com/XiZuo-Official" target="_blank">GitHub</a> |
-          <a href="https://onlyfans.com/YourOnlyFansName" target="_blank">OnlyFans</a> |
-          <a href="https://www.linkedin.com/in/YourLinkedIn" target="_blank">LinkedIn</a>
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XiZuo Personal Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["$", "$"], ["\\(", "\\)"]],
+          displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+        },
+        options: {
+          skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+        }
+      };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="sakura-layer" aria-hidden="true"></div>
+    <div class="app-shell">
+      <header class="top-bar card">
+        <div class="brand">
+          <span class="brand-icon">🌸</span>
+          <h1 id="site-title" data-i18n="siteTitle"></h1>
         </div>
-      </div>
-    </section>
-  </main>
-  <footer style="text-align: center; padding: 1rem; background-color: #ffe0f0; margin-top: 2rem;">
-    <p>© 2025 XiZuo-Official. All rights reserved.</p>
-  </footer>
+        <div class="top-actions">
+          <div class="language-switcher" id="language-switcher"></div>
+        </div>
+      </header>
+
+      <nav class="nav card" id="main-nav">
+        <button class="tap-bounce nav-btn active" data-page="home" data-i18n="navHome"></button>
+        <button class="tap-bounce nav-btn" data-page="notes" data-i18n="navNotes"></button>
+        <button class="tap-bounce nav-btn" data-page="blog" data-i18n="navBlog"></button>
+      </nav>
+
+      <main>
+        <section id="home-page" class="page active">
+          <div class="grid-two">
+            <article class="card profile-card">
+              <img id="avatar" class="avatar" alt="avatar" />
+              <h2 data-i18n="aboutTitle"></h2>
+              <p id="intro-text"></p>
+              <div class="contact-grid">
+                <a class="tap-bounce contact-card" id="email-link" href="#">
+                  <img src="/assets/email-logo.svg" alt="Email" class="contact-logo" />
+                  <span class="contact-name" data-i18n="emailLabel"></span>
+                  <span class="contact-hint" data-i18n="emailHint"></span>
+                </a>
+                <a class="tap-bounce contact-card" id="onlyfans-link" target="_blank" rel="noreferrer noopener">
+                  <img src="/assets/onlyfans-logo.jpg" alt="OnlyFans" class="contact-logo" />
+                  <span class="contact-name" data-i18n="onlyfansLabel"></span>
+                  <span class="contact-hint" data-i18n="onlyfansHint"></span>
+                </a>
+              </div>
+            </article>
+
+            <article class="card donate-card">
+              <h2 data-i18n="donateTitle"></h2>
+              <p data-i18n="donateDesc"></p>
+              <div class="pay-grid">
+                <div class="pay-item">
+                  <p class="small pay-label" data-i18n="alipayLabel"></p>
+                  <img id="alipay-qr" class="qr" alt="alipay" />
+                </div>
+                <div class="pay-item">
+                  <p class="small pay-label" data-i18n="wechatPayLabel"></p>
+                  <img id="wechat-qr" class="qr" alt="wechat pay" />
+                </div>
+                <div class="pay-item">
+                  <p class="small pay-label" data-i18n="zelleLabel"></p>
+                  <img id="zelle-qr" class="qr" alt="zelle" />
+                </div>
+              </div>
+              <p class="small" data-i18n="donateThanks"></p>
+            </article>
+          </div>
+        </section>
+
+        <section id="notes-page" class="page">
+          <div class="card notes-toolbar">
+            <h2 data-i18n="notesTitle"></h2>
+            <div class="toolbar-row">
+              <input id="global-search" type="search" />
+              <button id="global-search-btn" class="tap-bounce" data-i18n="searchAllBtn"></button>
+            </div>
+            <p id="global-search-result" class="small"></p>
+          </div>
+
+          <div class="notes-layout">
+            <aside class="notes-side">
+              <section class="card notes-list-wrap">
+                <h3 data-i18n="noteListTitle"></h3>
+                <ul id="notes-list" class="notes-list"></ul>
+              </section>
+              <section id="note-structure" class="card note-structure" hidden>
+                <p class="small structure-title" data-i18n="noteStructureTitle"></p>
+                <ul id="note-toc" class="note-toc"></ul>
+              </section>
+            </aside>
+
+            <article class="card note-viewer">
+              <div class="note-viewer-head">
+                <h3 id="note-title"></h3>
+              </div>
+              <div class="toolbar-row note-search-panel" id="note-search-wrap" hidden>
+                  <input id="note-search" type="search" />
+                  <button id="note-search-btn" class="tap-bounce" data-i18n="searchInNoteBtn"></button>
+              </div>
+              <p id="note-search-result" class="small"></p>
+              <div id="note-content" class="markdown"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="blog-page" class="page">
+          <div id="blog-list" class="blog-list"></div>
+        </section>
+      </main>
+      <footer class="site-footer">
+        <p class="small" data-i18n="copyrightNotice"></p>
+      </footer>
+    </div>
+
+    <script type="module" src="/scripts/app.js"></script>
   </body>
-  </html>
+</html>

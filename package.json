@@ -1,0 +1,22 @@
+{
+  "name": "xizuo_website",
+  "version": "1.0.0",
+  "description": "Personal pink theme website with multilingual UI, notes, and blog",
+  "main": "index.js",
+  "scripts": {
+    "dev": "python3 -m http.server 8080",
+    "check": "node --check scripts/app.js && node --check scripts/markdown.js && node --check config/i18n.js && node --check config/languages.js && node --check config/site-data.js && node --check data/notes.js && node --check data/blog-posts.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XiZuo-Official/XiZuo-Official.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/XiZuo-Official/XiZuo-Official.github.io/issues"
+  },
+  "homepage": "https://github.com/XiZuo-Official/XiZuo-Official.github.io#readme"
+}
