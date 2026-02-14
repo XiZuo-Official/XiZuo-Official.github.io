@@ -46,7 +46,8 @@
     ```
 - 创建数据库
     ```sql
-    CREATE DATABASE 表名;
+    CREATE DATABASE 数据库名;   
+    -- 最简写法
     ```
     ```sql
     CREATE DATABASE (IF NOT EXISTS) 表名 (DEFAULT CHARSET 字符集) (COLLATE 排序);
@@ -85,6 +86,7 @@
     --DROP TABLE IF EXISTS 表名避免报错
     --DROP TABLE table1,table2,table3
     ```
+
 - 清空表数据
     ```sql
     TRUNCATE TABLE 表名
@@ -133,16 +135,18 @@
     ```
 - 批量添加数据
     ```sql
-    INSERT INTO 表名 (字段1, 字段2)
+    INSERT INTO 表名 (字段1, 字段2)  
     VALUES (值1, 值2),
     (值1, 值2),
     (值1, 值2);
+    -- 批量给指定字段添加
     ```
     ```sql
     INSERT INTO 表名
     VALUES (值1, 值2, 值3), 
     (值1, 值2, 值3),
     (值1, 值2, 值3);
+    -- 给全部字段添加
     ```
 ### 2. 修改数据
 - 修改全表数据
@@ -160,7 +164,6 @@
     ```
 # 四、DQL
 ### 1. DQL 语法
-- 
     ```sql
     SELECT      字段
     FROM        表名
@@ -233,14 +236,13 @@
     | MAX(col) | 最大值 | 列 | MAX(price) | 可用于字符串 |
     | MIN(col) | 最小值 | 列 | MIN(price) | 可用于字符串 |
 ### 4. 分组查询
-- 语法
     ```sql
     SELECT 字段 FROM 表名 (WHERE 条件) GROUP BY 分组字段名 (HAVING 分组后过滤条件)
     ```
-    where条件是分组之前过滤，having是分组之后对结果过滤；
-    where不能用聚合函数，having可以。
-    执行顺序 where > 聚合函数 > having
-    分组后一般只查询分组字段和聚合函数
+    - where条件是分组之前过滤，having是分组之后对结果过滤；
+    - where不能用聚合函数，having可以。
+    - 执行顺序 where > 聚合函数 > having
+    - 分组后一般只查询分组字段和聚合函数
 ### 5. 排序和分页查询
 - 排序查询
     ```sql
@@ -252,11 +254,10 @@
     ```sql
     SELECT 字段 FROM 表名 LIMIT 起始索引, 查询记录数;
     ```
-    起始索引 = 每页记录数 * (查询页码 - 1)
-    第一页数据可省略，写为limit 10
+    - 起始索引 = 每页记录数 * (查询页码 - 1)
+    - 第一页数据可省略，写为limit 10
 
 ### 6. DQL语句的执行顺序
-- 
     ```sql
     FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY - LIMIT 
     ```
@@ -319,9 +320,11 @@
     | EVENT | 创建事件调度器 | 定时任务 |
     | REFERENCES | 外键约束 | 表关联 |
     | GRANT OPTION | 允许把自己的权限再授权给别人 | 管理权限 |
+
 # 六、函数
-### 1. 字符串函数
-- 
+
+### 1. 字符串函数 
+
     | 函数名 | 作用 | 示例 | 结果 |
     |------|------|------|------|
     | LENGTH(str) | 返回字符串字节长度 | LENGTH('abc') | 3 |
@@ -346,8 +349,8 @@
     | STRCMP(str1, str2) | 比较字符串 | STRCMP('a','b') | -1 |
     | FIND_IN_SET(str, list) | 查找在集合中的位置 | FIND_IN_SET('b','a,b,c') | 2 |
 
-2. 取值函数
-- 
+### 2. 取值函数
+
     | 函数 | 基本语法 | 含义 | 关键规则 | 示例 | 结果 |
     |----|----|----|----|----|----|
     | LEFT | LEFT(str, n) | 从左取 n 个字符 | n ≤ 0 返回空串 | LEFT('abcdef', 3) | abc |
@@ -360,7 +363,6 @@
     | CHAR_LENGTH | CHAR_LENGTH(str) | 字符长度 | 中文算 1 | CHAR_LENGTH('你好a') | 3 |
     | LENGTH | LENGTH(str) | 字节长度 | UTF8 中文算 3 | LENGTH('你好a') | 7 |
 ### 3. 日期函数
-- 
     | 函数 | 语法 | 含义 | 关键规则 | 示例 | 结果 |
     |----|----|----|----|----|----|
     | CURDATE | CURDATE() | 当前日期 | 不含时间 | CURDATE() | 2026-01-21 |
@@ -387,8 +389,7 @@
     | TIMESTAMPDIFF | TIMESTAMPDIFF(unit, t1, t2) | 时间差 | 精确单位 | TIMESTAMPDIFF(DAY,'2026-01-01','2026-01-21') | 20 |
     | STR_TO_DATE | STR_TO_DATE(str, fmt) | 字符串→日期 | 需格式 | STR_TO_DATE('2026-01-21','%Y-%m-%d') | 2026-01-21 |
     | DATE_FORMAT | DATE_FORMAT(date, fmt) | 日期→字符串 | 常用 | DATE_FORMAT('2026-01-21','%Y/%m/%d') | 2026/01/21 |
-### 4. 流程控制函数
-- 
+### 4. 流程控制函数 
     | 函数 | 作用 | 语法 | 示例 | 结果 |
     |---|---|---|---|---|
     | IF(expr, v1, v2) | 条件判断，真取 v1 否取 v2 | IF(条件, 真值, 假值) | IF(60>=60,'及格','不及格') | 及格 |
@@ -398,7 +399,6 @@
     | CASE expr WHEN | 等值判断 | CASE expr WHEN 值 THEN 值 END | CASE sex WHEN '男' THEN 1 END | 1 |
 # 七、约束
 ### 1. 约束分类
-- 
     | 约束 | 作用 | 位置 | 示例 | 说明 |
     |---|---|---|---|---|
     | PRIMARY KEY | 主键，唯一且非空 | 列 / 表 | id INT PRIMARY KEY | 一张表只能一个 |
@@ -468,16 +468,16 @@
 - SET DEFAULT: MySQL用不了
 
 ### 4.修改外键约束流程
-1) 查看外键名
+- 1. 查看外键名
     ```sql 
     SHOW CREATE TABLE orders;
     ```
-2) 删除原外键
+- 2. 删除原外键
     ```
     ALTER TABLE 表名
     DROP FOREIGN KEY 外键名;
     ```
-3) 重新添加外键
+- 3. 重新添加外键
     ```sql
     ALTER TABLE 表名
     ADD CONSTRAINT 键名
@@ -514,8 +514,7 @@
     RIGHT JOIN 表2 ON 条件;
     -- 查询表2 所有数据，以及1和2的交集
     ```
-### 3. 自连接
-- 
+### 3. 自连接 
     ```sql
     SELECT 字段列表 FROM 表1 别名1 
     JOIN 表1 别名2 ON 条件;
@@ -532,8 +531,9 @@
     -- 两个字段列表的列数必须一样，列的类型需要兼容
     -- 只能在末尾写一个ORDER BY
     ```
+
 ### 5. 子查询
-* 嵌套查询
+- 嵌套查询
 - 标量子查询
     > 返回的结果是单个值（num，char，time等），常用操作符为=, <>, >, >=, <, <=
 - 列子查询
@@ -548,7 +548,7 @@
 
 
 # 九、事务
-事务（Transaction）是一组 SQL 操作，所有操作为一个不可分割的整体工作单位，一起提交给系统或者撤销操作请求。操作要么全部成功，要么全部失败。
+    事务（Transaction）是一组 SQL 操作，所有操作为一个不可分割的整体工作单位，一起提交给系统或者撤销操作请求。操作要么全部成功，要么全部失败。
 
 - 查看事务的自动提交方式
     ```sql
@@ -572,4 +572,4 @@
     START / BEGIN TRANSACTION;
     ```
 
-
+# 待更新...

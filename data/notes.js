@@ -28,8 +28,8 @@ export const NOTES = [
   {
     id: "mysql",
     files: {
-      ja: "/MySQL.md",
-      en: "/MySQL.md",
+      ja: "/MySQL.ja.md",
+      en: "/MySQL.en.md",
       "zh-CN": "/MySQL.md"
     },
     title: {

@@ -54,6 +54,7 @@ export function markdownToHtml(markdown) {
   const html = [];
 
   let inCode = false;
+  let codeLang = "";
   let inList = false;
   let listType = "ul";
   let inMath = false;
@@ -77,7 +78,19 @@ export function markdownToHtml(markdown) {
     mathBuffer.length = 0;
   }
 
-  for (const line of lines) {
+  function splitTableRow(line) {
+    const trimmed = line.trim().replace(/^\|/, "").replace(/\|$/, "");
+    return trimmed.split("|").map((cell) => cell.trim());
+  }
+
+  function isTableSeparator(line) {
+    const cells = splitTableRow(line);
+    if (!cells.length) return false;
+    return cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+  }
+
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
     const trimmed = line.trim();
 
     if (trimmed.startsWith("```")) {
@@ -85,9 +98,15 @@ export function markdownToHtml(markdown) {
 
       if (!inCode) {
         inCode = true;
-        html.push("<pre><code>");
+        codeLang = trimmed.slice(3).trim().toLowerCase();
+        if (codeLang === "mysql") {
+          codeLang = "sql";
+        }
+        const classAttr = codeLang ? ` class="language-${escapeHtml(codeLang)}"` : "";
+        html.push(`<pre><code${classAttr}>`);
       } else {
         inCode = false;
+        codeLang = "";
         html.push("</code></pre>");
       }
       continue;
@@ -115,8 +134,55 @@ export function markdownToHtml(markdown) {
       continue;
     }
 
-    const unordered = /^\s*[-*+]\s+/.test(line);
-    const ordered = /^\s*\d+\.\s+/.test(line);
+    const nextLine = i + 1 < lines.length ? lines[i + 1] : "";
+    if (trimmed.includes("|") && nextLine.trim() && isTableSeparator(nextLine)) {
+      closeListIfOpen();
+      const tableLeadingSpaces = (line.match(/^\s*/)?.[0] || "").replaceAll("\t", "    ").length;
+      const tableIndentLevel = Math.floor(tableLeadingSpaces / 2);
+      const tableIndentRem = Math.min(tableIndentLevel * 0.65, 4);
+      const headers = splitTableRow(line);
+      const alignSpec = splitTableRow(nextLine);
+      const aligns = alignSpec.map((cell) => {
+        if (cell.startsWith(":") && cell.endsWith(":")) return "center";
+        if (cell.endsWith(":")) return "right";
+        return "left";
+      });
+
+      html.push(`<table style="margin-left:${tableIndentRem}rem;width:calc(100% - ${tableIndentRem}rem)">`);
+      html.push("<thead><tr>");
+      headers.forEach((header, idx) => {
+        const align = aligns[idx] || "left";
+        html.push(`<th style="text-align:${align}">${parseInline(header)}</th>`);
+      });
+      html.push("</tr></thead>");
+      html.push("<tbody>");
+
+      i += 2;
+      for (; i < lines.length; i += 1) {
+        const rowLine = lines[i];
+        const rowTrimmed = rowLine.trim();
+        if (!rowTrimmed || !rowTrimmed.includes("|")) {
+          i -= 1;
+          break;
+        }
+
+        const cells = splitTableRow(rowLine);
+        html.push("<tr>");
+        headers.forEach((_, idx) => {
+          const align = aligns[idx] || "left";
+          const value = cells[idx] || "";
+          html.push(`<td style="text-align:${align}">${parseInline(value)}</td>`);
+        });
+        html.push("</tr>");
+      }
+
+      html.push("</tbody></table>");
+      continue;
+    }
+
+    const listMatch = line.match(/^(\s*)([-*+]|\d+\.)\s+(.*)$/);
+    const unordered = !!listMatch && /[-*+]/.test(listMatch[2]);
+    const ordered = !!listMatch && /\d+\./.test(listMatch[2]);
 
     if (unordered || ordered) {
       const nextType = ordered ? "ol" : "ul";
@@ -130,8 +196,10 @@ export function markdownToHtml(markdown) {
         html.push(`<${listType}>`);
       }
 
-      const cleaned = line.replace(/^\s*(?:[-*+]|\d+\.)\s+/, "");
-      html.push(`<li>${parseInline(cleaned)}</li>`);
+      const leadingSpaces = (listMatch?.[1] || "").replaceAll("\t", "    ").length;
+      const level = Math.max(0, Math.floor(leadingSpaces / 2));
+      const cleaned = listMatch?.[3] || line.replace(/^\s*(?:[-*+]|\d+\.)\s+/, "");
+      html.push(`<li class="list-level-${Math.min(level, 3)}">${parseInline(cleaned)}</li>`);
       continue;
     }
 
@@ -145,7 +213,10 @@ export function markdownToHtml(markdown) {
     }
 
     if (/^\s*>\s?/.test(line)) {
-      html.push(`<blockquote>${parseInline(line.replace(/^\s*>\s?/, ""))}</blockquote>`);
+      const leadingSpaces = line.match(/^\s*/)?.[0].length || 0;
+      const indentLevel = Math.floor(leadingSpaces / 2);
+      const indentRem = Math.min(indentLevel * 0.65, 4);
+      html.push(`<blockquote style="margin-left:${indentRem}rem">${parseInline(line.replace(/^\s*>\s?/, ""))}</blockquote>`);
       continue;
     }
 
@@ -180,7 +251,7 @@ export function stripMarkdown(markdown) {
     .replaceAll(/&[a-zA-Z0-9#]+;/g, " ")
     .replaceAll(/!\[[^\]]*\]\([^)]+\)/g, " ")
     .replaceAll(/\[[^\]]+\]\(([^)]+)\)/g, " ")
-    .replaceAll(/[`*_>#-]/g, " ")
+    .replaceAll(/[`*_>#|\-]/g, " ")
     .replaceAll(/\s+/g, " ")
     .trim();
 }

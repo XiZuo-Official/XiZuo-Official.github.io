@@ -68,7 +68,14 @@ a {
   position: relative;
   z-index: 1;
   width: min(1460px, calc(100% - 2rem));
-  margin: 1.2rem auto 3rem;
+  margin: 1.2rem auto 0.9rem;
+  min-height: calc(100dvh - 2.1rem);
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 .card {
@@ -265,11 +272,26 @@ button:active,
 .pay-label {
   margin: 0;
   text-align: center;
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .pay-item .qr {
   aspect-ratio: 1 / 1;
   max-width: 100%;
+}
+
+.pay-item-alipay .pay-label {
+  color: #1677ff;
+}
+
+.pay-item-wechat .pay-label {
+  color: #07c160;
+}
+
+.pay-item-zelle .pay-label {
+  color: #6d28d9;
 }
 
 #intro-text {
@@ -483,10 +505,64 @@ input[type="search"] {
   padding: 0;
 }
 
+.markdown pre code.hljs {
+  background: transparent;
+}
+
 .markdown img {
   max-width: 100%;
   border-radius: 12px;
   border: 1px solid rgba(237, 88, 158, 0.3);
+}
+
+.markdown li.list-level-1 {
+  margin-left: 1rem;
+  list-style-type: circle;
+}
+
+.markdown li.list-level-2 {
+  margin-left: 2rem;
+  list-style-type: circle;
+}
+
+.markdown li.list-level-3 {
+  margin-left: 2rem;
+  list-style-type: square;
+}
+
+.markdown blockquote {
+  margin: 0.8rem 0;
+  padding: 0.55rem 0.85rem;
+  border-left: 4px solid rgba(133, 133, 133, 0.55);
+  background: rgba(120, 120, 120, 0.08);
+  color: #666;
+  border-radius: 8px;
+}
+
+.markdown blockquote p {
+  margin: 0;
+}
+
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0;
+  display: block;
+  overflow-x: auto;
+  background: rgba(255, 250, 253, 0.9);
+  border-radius: 12px;
+}
+
+.markdown th,
+.markdown td {
+  border: 1px solid rgba(229, 121, 182, 0.28);
+  padding: 0.5rem 0.65rem;
+  white-space: nowrap;
+}
+
+.markdown th {
+  background: rgba(255, 220, 240, 0.75);
+  font-weight: 700;
 }
 
 .math-block {
@@ -562,9 +638,10 @@ mark {
 }
 
 .site-footer {
-  margin-top: 1rem;
+  margin-top: auto;
+  margin-bottom: 0.2rem;
   text-align: center;
-  padding: 0.8rem 1rem;
+  padding: 0.55rem 1rem 0.35rem;
 }
 
 @media (max-width: 900px) {

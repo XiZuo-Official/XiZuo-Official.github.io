@@ -341,36 +341,50 @@ function slugifyHeading(text, index, used) {
 
 function buildNoteToc() {
   els.noteToc.innerHTML = "";
-  const headings = [...els.noteContent.querySelectorAll("h1, h2, h3, h4, h5, h6")];
+  const targets = [...els.noteContent.querySelectorAll("h1, h3")];
 
-  if (!headings.length) {
+  if (!targets.length) {
     els.noteStructure.hidden = true;
     return;
   }
 
   const usedIds = new Set();
+  let tocCount = 0;
 
-  headings.forEach((heading, index) => {
-    if (!heading.id) {
-      heading.id = slugifyHeading(heading.textContent || "", index, usedIds);
+  targets.forEach((target) => {
+    if (!target.id) {
+      target.id = slugifyHeading(target.textContent || "", tocCount, usedIds);
     } else {
-      usedIds.add(heading.id);
+      usedIds.add(target.id);
     }
 
-    const level = Number(heading.tagName[1]);
-    const li = document.createElement("li");
-    const button = document.createElement("button");
+    const level = Number(target.tagName[1]);
 
-    button.type = "button";
-    button.className = `toc-link tap-bounce toc-l${level}`;
-    button.textContent = heading.textContent || "";
+    if (level === 1) {
+      const li = document.createElement("li");
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "toc-link tap-bounce toc-l1";
+      button.textContent = target.textContent || "";
+      button.addEventListener("click", () => {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      li.appendChild(button);
+      els.noteToc.appendChild(li);
+    } else if (level === 3) {
+      const li = document.createElement("li");
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "toc-link tap-bounce toc-l3";
+      button.textContent = target.textContent || "";
+      button.addEventListener("click", () => {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      li.appendChild(button);
+      els.noteToc.appendChild(li);
+    }
 
-    button.addEventListener("click", () => {
-      heading.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-
-    li.appendChild(button);
-    els.noteToc.appendChild(li);
+    tocCount += 1;
   });
 
   els.noteStructure.hidden = false;
@@ -383,6 +397,17 @@ async function renderMath(container) {
   } catch (error) {
     console.error(error);
   }
+}
+
+function renderHighlight(container) {
+  if (!window.hljs || typeof window.hljs.highlightElement !== "function") return;
+  container.querySelectorAll("pre code").forEach((block) => {
+    if (block.classList.contains("language-mysql")) {
+      block.classList.remove("language-mysql");
+      block.classList.add("language-sql");
+    }
+    window.hljs.highlightElement(block);
+  });
 }
 
 async function renderActiveNote() {
@@ -402,6 +427,7 @@ async function renderActiveNote() {
   els.noteSearchWrap.hidden = false;
 
   buildNoteToc();
+  renderHighlight(els.noteContent);
   await renderMath(els.noteContent);
 
   if (state.noteQuery.trim()) {
@@ -415,9 +441,12 @@ async function renderActiveNote() {
 }
 
 function getPostExcerpt(content) {
-  const plain = stripMarkdown(content);
+  const normalized = content.replaceAll("\r\n", "\n").trim();
+  const firstParagraph = normalized.split(/\n{2,}/)[0].replaceAll("\n", " ").trim();
+  const plain = stripMarkdown(firstParagraph);
   const max = 54;
-  return plain.length > max ? `${plain.slice(0, max)}...` : plain;
+  if (plain.length > max) return `${plain.slice(0, max)}...`;
+  return normalized.length > firstParagraph.length ? `${plain}...` : plain;
 }
 
 async function renderBlog() {
@@ -483,6 +512,7 @@ async function renderBlog() {
         summary.classList.toggle("is-hidden", visible);
         summary.style.display = visible ? "none" : "";
         if (visible) {
+          renderHighlight(detail);
           await renderMath(detail);
         }
       });

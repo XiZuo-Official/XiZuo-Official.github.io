@@ -3,9 +3,9 @@
 -
     ```python
     import torch
-    torch.tensor 根据指定数据创建张量
-    torch.Tensor 根据形状创建
-    torch.IntTensor | torch.FloatTensor 创建指定类型
+    # torch.tensor: 根据指定数据创建张量
+    # torch.Tensor: 根据形状创建
+    # torch.IntTensor | torch.FloatTensor: 创建指定类型
     ```
 # 二、张量的运算
 ### 1. 
@@ -1602,4 +1602,3 @@ RNN 的 损失函数是对所有预测步数损失的求和或者平均
         sparse=False
     )
     ```
-
