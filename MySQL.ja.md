@@ -1,6 +1,6 @@
-# 一、文法分類とデータ型
+# 一、構文分類とデータ型
 
-### 1. SQL文法の分類
+### 1. SQL構文の分類
 | 分類 | 正式名称 | 役割 | よく使う構文 |
 |---|---|---|---|
 | DDL | Data Definition Language | DB/テーブル構造の定義・変更 | CREATE、ALTER、DROP、TRUNCATE |
@@ -172,7 +172,7 @@
     GROUP BY    grouping_columns
     HAVING      post_group_conditions
     ORDER BY    sort_columns
-    LIMIT       pagination
+    LIMIT       ページング条件
     ```
 
 ### 2. DQL基本検索
@@ -282,11 +282,11 @@
     ```
 - ユーザー削除
     ```sql
-    DROP USER 'username@hostname';
+    DROP USER 'username'@'hostname';
     ```
 - パスワード変更
     ```sql
-    ALTER USER 'username@hostname'
+    ALTER USER 'username'@'hostname'
     IDENTIFIED WITH caching_sha2_password BY 'new_password';
     -- MySQL 8.0以前は mysql_native_password が一般的
     ```
@@ -304,7 +304,7 @@
     ```
 - 権限剥奪
     ```sql
-    REVOKE privileges ON database.table TO 'username'@'hostname';
+    REVOKE privileges ON database.table FROM 'username'@'hostname';
     ```
 - 権限一覧
     | 権限名 | 役割 | 主な場面 |
@@ -555,7 +555,7 @@
     - **NOT IN**：集合に含まれない
     - **ANY / SOME**：いずれか満たせばよい
     - **ALL**：すべて満たす必要あり
-    - **EXIST**：存在すれば真
+    - **EXISTS**：存在すれば真
 - 行サブクエリ
     > 1行を返す。=, <>, IN, NOT IN と併用。
 
@@ -584,4 +584,4 @@
     START / BEGIN TRANSACTION;
     ```
 
-# 待更新...
+# 更新予定...

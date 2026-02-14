@@ -171,7 +171,7 @@
     GROUP BY    grouping_columns
     HAVING      post_group_conditions
     ORDER BY    sort_columns
-    LIMIT       pagination
+    LIMIT       limit_clause
     ```
 
 ### 2. Basic DQL Queries
@@ -193,7 +193,7 @@
     -- DISTINCT col1, col2 means unique combinations of two columns
     ```
 
-### 3. Conditional Query
+### 3. Conditional Queries
 - Syntax
     ```sql
     SELECT columns FROM table_name WHERE condition;
@@ -216,7 +216,7 @@
     | Fuzzy | LIKE '%x%' | contains | model LIKE '%X%' |
     | Fuzzy | LIKE 'x%' | starts with x | model LIKE 'X%' |
     | Fuzzy | LIKE '%x' | ends with x | model LIKE '%X' |
-    | Fuzzy | NOT LIKE | not match | model NOT LIKE '%X%' |
+    | Fuzzy | NOT LIKE | does not match | model NOT LIKE '%X%' |
 
 - Logical operators
 
@@ -237,7 +237,7 @@
     | MAX(col) | maximum | column | MAX(price) | works on strings too |
     | MIN(col) | minimum | column | MIN(price) | works on strings too |
 
-### 4. Group Query
+### 4. Grouping Queries
     ```sql
     SELECT columns FROM table_name (WHERE condition) GROUP BY group_column (HAVING post_group_filter)
     ```
@@ -246,7 +246,7 @@
     - Execution order: `WHERE` > aggregate functions > `HAVING`.
     - After grouping, typically query only group columns and aggregate functions.
 
-### 5. Sorting and Pagination Query
+### 5. Sorting and Pagination
 - Sorting query
     ```sql
     SELECT columns FROM table_name
@@ -281,11 +281,11 @@
     ```
 - Delete user
     ```sql
-    DROP USER 'username@hostname';
+    DROP USER 'username'@'hostname';
     ```
 - Modify user password
     ```sql
-    ALTER USER 'username@hostname'
+    ALTER USER 'username'@'hostname'
     IDENTIFIED WITH caching_sha2_password BY 'new_password';
     -- before MySQL 8.0: mysql_native_password is commonly used
     ```
@@ -303,7 +303,7 @@
     ```
 - Revoke privileges
     ```sql
-    REVOKE privileges ON database.table TO 'username'@'hostname';
+    REVOKE privileges ON database.table FROM 'username'@'hostname';
     ```
 - Privilege list
     | Privilege | Description | Typical Use |
@@ -354,7 +354,7 @@
     | STRCMP(str1, str2) | compare strings | STRCMP('a','b') | -1 |
     | FIND_IN_SET(str, list) | index in set | FIND_IN_SET('b','a,b,c') | 2 |
 
-### 2. Extracting Functions
+### 2. Extraction Functions
 
     | Function | Syntax | Meaning | Key Rule | Example | Result |
     |----|----|----|----|----|----|
@@ -493,7 +493,7 @@
     ON DELETE SET NULL ON UPDATE SET NULL;
     ```
 
-# 8. Multi-table Query
+# 8. Multi-table Queries
 ### 1. Inner Join
 - Implicit inner join
     ```sql
@@ -533,7 +533,7 @@
     -- can be INNER / LEFT / RIGHT join
     ```
 
-### 4. Union Query
+### 4. UNION Queries
 - Merge results of multiple queries
     ```sql
     SELECT columns FROM ...
@@ -554,7 +554,7 @@
     - **NOT IN**: not in the set
     - **ANY / SOME**: satisfies at least one
     - **ALL**: satisfies all
-    - **EXIST**: passes if exists
+    - **EXISTS**: returns true if exists
 - Row subquery
     > returns one row, commonly used with =, <>, IN, NOT IN
 
