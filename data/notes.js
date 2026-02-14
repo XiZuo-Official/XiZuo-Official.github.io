@@ -15,8 +15,8 @@ export const NOTES = [
   {
     id: "dl",
     files: {
-      ja: "/DL.md",
-      en: "/DL.md",
+      ja: "/DL.ja.md",
+      en: "/DL.en.md",
       "zh-CN": "/DL.md"
     },
     title: {

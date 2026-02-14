@@ -102,6 +102,6 @@ export const TEXTS = {
     readMore: "展开全文",
     readLess: "收起",
     untitledPost: "无标题",
-    copyrightNotice: "© 2026 佐佐木希子 保留所有权利"
+    copyrightNotice: "© 2026 佐佐木希子. All rights reserved."
   }
 };
