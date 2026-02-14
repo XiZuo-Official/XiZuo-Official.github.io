@@ -2,8 +2,8 @@ export const NOTES = [
   {
     id: "ml",
     files: {
-      ja: "/ML.md",
-      en: "/ML.md",
+      ja: "/ML.ja.md",
+      en: "/ML.en.md",
       "zh-CN": "/ML.md"
     },
     title: {
