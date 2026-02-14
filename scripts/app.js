@@ -1,9 +1,21 @@
-import { LANGUAGE_OPTIONS, DEFAULT_LOCALE } from "/config/languages.js";
-import { TEXTS } from "/config/i18n.js";
-import { SITE_DATA } from "/config/site-data.js";
-import { NOTES } from "/data/notes.js";
-import { BLOG_POSTS } from "/data/blog-posts.js";
-import { markdownToHtml, stripMarkdown } from "/scripts/markdown.js";
+const APP_VERSION = window.__APP_VERSION || "dev";
+const withVersion = (path) => `${path}${path.includes("?") ? "&" : "?"}v=${encodeURIComponent(APP_VERSION)}`;
+
+const [
+  { LANGUAGE_OPTIONS, DEFAULT_LOCALE },
+  { TEXTS },
+  { SITE_DATA },
+  { NOTES },
+  { BLOG_POSTS },
+  { markdownToHtml, stripMarkdown }
+] = await Promise.all([
+  import(withVersion("/config/languages.js")),
+  import(withVersion("/config/i18n.js")),
+  import(withVersion("/config/site-data.js")),
+  import(withVersion("/data/notes.js")),
+  import(withVersion("/data/blog-posts.js")),
+  import(withVersion("/scripts/markdown.js"))
+]);
 
 const state = {
   locale: DEFAULT_LOCALE,
@@ -73,6 +85,12 @@ function resolveLocalizedFile(filesLike) {
   return "";
 }
 
+function versionedPath(path) {
+  if (!path) return path;
+  if (/^https?:\/\//i.test(path)) return path;
+  return withVersion(path);
+}
+
 function createSakuraPetal() {
   const layer = document.querySelector(".sakura-layer");
   if (!layer) return;
@@ -138,22 +156,22 @@ function applyI18n() {
 }
 
 function setProfile() {
-  els.avatar.src = SITE_DATA.profile.avatar;
+  els.avatar.src = versionedPath(SITE_DATA.profile.avatar);
   els.avatar.onerror = () => {
-    els.avatar.src = "/assets/avatar-placeholder.svg";
+    els.avatar.src = versionedPath("/assets/avatar-placeholder.svg");
   };
 
-  els.alipayQr.src = SITE_DATA.donate.alipayQr;
+  els.alipayQr.src = versionedPath(SITE_DATA.donate.alipayQr);
   els.alipayQr.onerror = () => {
-    els.alipayQr.src = "/assets/alipay-placeholder.svg";
+    els.alipayQr.src = versionedPath("/assets/alipay-placeholder.svg");
   };
-  els.wechatQr.src = SITE_DATA.donate.wechatQr;
+  els.wechatQr.src = versionedPath(SITE_DATA.donate.wechatQr);
   els.wechatQr.onerror = () => {
-    els.wechatQr.src = "/assets/wechat-placeholder.svg";
+    els.wechatQr.src = versionedPath("/assets/wechat-placeholder.svg");
   };
-  els.zelleQr.src = SITE_DATA.donate.zelleQr;
+  els.zelleQr.src = versionedPath(SITE_DATA.donate.zelleQr);
   els.zelleQr.onerror = () => {
-    els.zelleQr.src = "/assets/zelle-placeholder.svg";
+    els.zelleQr.src = versionedPath("/assets/zelle-placeholder.svg");
   };
 
   els.emailLink.href = SITE_DATA.profile.email;
@@ -162,7 +180,7 @@ function setProfile() {
 
 async function fetchTextContent(filePath) {
   if (!filePath) return "";
-  const response = await fetch(filePath);
+  const response = await fetch(versionedPath(filePath), { cache: "no-store" });
   if (!response.ok) throw new Error(`Failed to load file: ${filePath}`);
   return response.text();
 }
@@ -478,7 +496,7 @@ async function renderBlog() {
       if (post.image) {
         const thumb = document.createElement("img");
         thumb.className = "blog-thumb";
-        thumb.src = post.image;
+        thumb.src = versionedPath(post.image);
         thumb.alt = localizedTitle;
         summary.appendChild(thumb);
       }
@@ -499,7 +517,7 @@ async function renderBlog() {
       if (post.image) {
         const detailImage = document.createElement("img");
         detailImage.className = "blog-detail-image";
-        detailImage.src = post.image;
+        detailImage.src = versionedPath(post.image);
         detailImage.alt = localizedTitle;
         detail.prepend(detailImage);
       }
